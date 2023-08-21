@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Temperature Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: url('background-image.png') center/cover no-repeat;
+    }
+
+    .container {
+      padding: 20px;
+      width: 350px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .input, .select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .result {
+      display: inline-block;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #333;
+      font-size: 18px;
+    }
+
+    p {
+      line-height: 1.5;
+      margin-bottom: 5px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3>Temperature Converter</h3>
+    <label for="number">Degrees:</label>
+    <input class="input" type="number" id="number">
+
+    <label for="from">From:</label>
+    <select class="select" id="from">
+      <option value="fahrenheit">Fahrenheit</option>
+      <option value="celsius">Celsius</option>
+      <option value="kelvin">Kelvin</option>
+    </select>
+
+    <label for="to">To:</label>
+    <select class="select" id="to">
+      <option value="fahrenheit">Fahrenheit</option>
+      <option value="celsius">Celsius</option>
+      <option value="kelvin">Kelvin</option>
+    </select>
+
+    <button id="convertButton">Convert</button>
+
+    <p><strong>Result:</strong></p>
+    <p>
+      <span class="result" id="result"></span>
+    </p>
+  </div>
+
+  <script>
+        document.addEventListener("DOMContentLoaded", function() {
+      const convertButton = document.getElementById("convertButton");
+      const resultElement = document.getElementById("result");
+
+      convertButton.addEventListener("click", function() {
+        const value = parseFloat(document.getElementById("number").value);
+        const from = document.getElementById("from").value;
+        const to = document.getElementById("to").value;
+        let convertedValue = 0;
+
+        if (from === "celsius") {
+          if (to === "fahrenheit") {
+            convertedValue = (value * (9 / 5) + 32) + "°F";
+          } else if (to === "kelvin") {
+            convertedValue = (value + 273.15) + "°K";
+          }
+        } else if (from === "fahrenheit") {
+          if (to === "celsius") {
+            convertedValue = ((value - 32) * (5 / 9)) + "°C";
+          } else if (to === "kelvin") {
+            convertedValue = ((value - 32) * (5 / 9) + 273.15) + "°K";
+          }
+        } else if (from === "kelvin") {
+          if (to === "celsius") {
+            convertedValue = (value - 273.15) + "°C";
+          } else if (to === "fahrenheit") {
+            convertedValue = ((value - 273.15) * (9 / 5) + 32) + "°F";
+          }
+        }
+
+        resultElement.textContent = convertedValue;
+      });
+    });
+  </script>
+</body>
+</html>
